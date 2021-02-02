@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: %i[new create]
+  resources :boats, only: %i[create]
   post 'customer_login', to: 'sessions#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
