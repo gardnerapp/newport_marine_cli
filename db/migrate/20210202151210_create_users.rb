@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.string :email
       t.string :phone
       t.string :password_digest
-      # TODO index, updated @, created @ etc and index for boat
+      
       t.timestamps
     end
   end
