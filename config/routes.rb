@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :appointments
+  namespace :api do
+    resources :appointment, only: %i[create index]
+  end
   namespace :api do
     resources :boats, only: :create
   end
@@ -6,7 +10,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[create show update]
   end
   resources :users
-  post "/api/login", to: 'api/sessions#create'
+  post '/api/login', to: 'api/sessions#create'
   # TODO write test for api sessions, create, show, update
  
 

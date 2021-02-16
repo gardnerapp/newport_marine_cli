@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   # GET /users/:id
   def show
     @boats = @user.boats.all
+    @appointments = @user.appointments.all
   end
 
   # GET /users/new
