@@ -12,4 +12,8 @@ module SessionsHelper
     !current_user?.nil?
   end
 
+  def api_login(user)
+    render json: user
+  end
+
 end

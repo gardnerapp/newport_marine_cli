@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  before_save {email.downcase!}
+  has_many :boats, dependent: :destroy
+  before_save { email.downcase! }
   validates :name, presence: true, length: {maximum: 50}
   validates :email, presence: true, length: {maximum: 255},
             uniqueness: {case_sensitive: false}
@@ -10,5 +11,5 @@ class User < ApplicationRecord
   # 3. the auth method returns user if pWord is correct
   has_secure_password
 
-  # has_one :boat
+
 end

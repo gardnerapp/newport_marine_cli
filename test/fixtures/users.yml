@@ -1,5 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+corey:
+  name: Corey
+  email: example@example.com
+  phone: 4015364647
+  password_digest: foobar
+
 #one:
 #  name: MyString
 #  email: MyString
