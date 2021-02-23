@@ -1,5 +1,7 @@
 class Api::SessionsController < ActionController::API
 
+  # Make Sure to Only give over the remember token
+  # Exclude the Digest
   # POST api/login
   def create
     @user = User.find_by(phone: session_params[:phone])

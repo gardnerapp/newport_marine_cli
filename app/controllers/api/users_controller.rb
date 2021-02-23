@@ -3,6 +3,7 @@ class Api::UsersController < ActionController::API
   # GET /api/users/:id
 
   # POST /api/users
+  # Make Sure to only return the remember_token and exclude the remember digest
   def create
     @user = User.new(user_params)
     if @user.save
