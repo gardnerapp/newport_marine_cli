@@ -3,6 +3,7 @@ require 'test_helper'
 class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
 
   def setup
+    @user
     @boat = {
       name: "Sexy Hog",
       length: 40,

@@ -3,7 +3,7 @@ class Api::BoatsController < ActionController::API
   # need some way to validate to make sure that the boat is not being created by someone without authentication
 
   def create
-    @user = User.find(boat_params[:id])
+    @user = User.find(params[:id])
     if @user
       @boat = @user.boats.build(boat_params)
       if @boat.save
@@ -19,6 +19,6 @@ class Api::BoatsController < ActionController::API
   private
 
   def boat_params
-    params.require(:boat & :id).permit(:name, :location, :length)
+    params.require(:boat).permit(:name, :location, :length)
   end
 end
