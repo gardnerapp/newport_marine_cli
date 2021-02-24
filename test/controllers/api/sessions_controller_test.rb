@@ -18,12 +18,10 @@ class Api::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_not @user.remember_token, 'Nil Remember Token After Valid Auth '
   end
 
-
-
-  test 'Valid Auth Returns Valid Response' do
-    post api_login_path, params: {session: {
-      phone: @user.phone, password: @user.password
-    }}
+  test 'Correct Authentication Returns Valid Response' do
+    post api_login_path, params: { session: {
+      phone: @user.phone, password: @user.password }
+    }
     assert_response 202, "Valid Auth didn't return successful Response"
   end
 

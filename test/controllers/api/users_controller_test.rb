@@ -1,43 +1,47 @@
 require 'test_helper'
 
 class Api::UsersControllerTest < ActionDispatch::IntegrationTest
+
+  # TODO Figure Out How to Work W JSON
+
   def setup
-    @params = {
-      name: 'Marvin', email: 'checkMarv@example.com',
-      phone: '4014014014', password: '1' * 10,
-      password_confirmation: '1' * 10,
+    @user = {
+      name: 'corey', 
+      email: '123youareahog@example.com',
+      phone: '9098088877', 
+      password: 'foobar', 
+      password_confirmation: 'foobar'
     }
   end
-
-  test 'CreateUser should Return JSON User and proper status ' do
-    post api_users_path, params: @params
-    #TODO assert Json
-    assert_response :ok
+  
+  test 'Token Created Upon User Creation' do 
+    post api_users_path, params: {
+      user: @user 
+    }
+    user = User.last
+    assert_not user.remember_token
   end
 
-  test 'Should create User ' do
+  test 'Correct JSON & Status Returned From User Creation' do
+    post api_users_path, params: { 
+      user: @user 
+    }
+    assert_response 202
+  end
+
+  test 'Create should Change DB' do
     assert_difference 'User.count' do
-      post api_users_path, params: {user =>  @params}
+      post api_users_path, params: { user: @user }
     end
 
   end
 
   test 'Invalid submission returns unprocessable entity' do
-    @params = {}
-    post api_users_path, params: @params
+    @user['password'] = nil
+    post api_users_path, params: { user: @user
+
+    }
     assert_response :unprocessable_entity
   end
-
-  test 'Invalid submission does not add User to database' do
-    @params[:name] = @params[:password_confirmation] = nil
-    assert_no_difference 'User.count' do
-      post api_users_path, params: { user: {
-        name: 'Marvin', email: 'checkMarv@example.com',
-        phone: '4014014014', password: '2' * 10,
-        password_confirmation: '1' * 10,
-      } }
-    end
-  end
-
-
+  
 end

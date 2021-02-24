@@ -7,8 +7,12 @@ class Api::UsersController < ActionController::API
   def create
     @user = User.new(user_params)
     if @user.save
-      # create token here
-      render json: @user
+      @user.remember
+      render json: { name: @user.name,
+                     email: @user.email,
+                     phone: @user.phone,
+                     boat: @user.boat,
+                     token: @user.remember_token }, status: :accepted
     else
       render json: @user.errors, status: :unprocessable_entity
     end
