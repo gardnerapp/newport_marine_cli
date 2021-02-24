@@ -2,6 +2,7 @@ require 'test_helper'
 
 class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
 
+=begin
   def setup
     @user
     @boat = {
@@ -41,5 +42,6 @@ class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
   test 'invalid UserID, valid boat fails' do
 
   end
+=end
 
 end

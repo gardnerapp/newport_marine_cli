@@ -1,40 +1,38 @@
 require 'test_helper'
 
 class Api::SessionsControllerTest < ActionDispatch::IntegrationTest
+
   def setup
-    @user = users(:corey)
+    @user = User.new(
+      name: 'Corey', email: 'CoreyG123@example.com',
+      phone: '5556661122', password: 'foobardo',
+      password_confirmation: 'foobardo'
+    )
   end
 
-  test 'Only phone and password params allowed' do
-    post api_login_path, params: {
-      phone: @user.phone, #is this the proper way to reference fixture data
-      password: @user.password,
-      hog: "Yo I'm trying to hack your application by sending remote curl request"
+  test 'Valid Authentication updates token' do
+    post api_login_path, params: { session: {
+      phone: @user.phone,
+      password: @user.password }
     }
-    assert_response :unprocessable_entity
-
+    assert_not @user.remember_token, 'Nil Remember Token After Valid Auth '
   end
 
-  test 'Valid submission returns user' do
-    post api_login_path, params: {
-      phone: @user.phone, #is this the proper way to reference fixture data
-      password: @user.password
-    }
-    assert_response :accepted
-    #TODO return user in JSon
+
+
+  test 'Valid Auth Returns Valid Response' do
+    post api_login_path, params: {session: {
+      phone: @user.phone, password: @user.password
+    }}
+    assert_response 202, "Valid Auth didn't return successful Response"
   end
 
-  test 'Blank submission returns unprocessable' do
-    post api_login_path, params: {}
-    assert_response :unprocessable_entity
+  test 'Invalid authentication correct Response' do
+    post api_login_path, params: {session: {
+      phone: @user.phone, password: @user.password
+    }}
+    assert_response 422, "Invalid Auth didn't return Correct Response"
   end
 
-  test 'Wrong authentication returns unprocessable' do
-    post api_login_path, params: {
-      user: { phone: @user.phone, #is this the proper way to reference fixture data
-              password: @user.email} 
-}
-    assert_response :unprocessable_entity
-  end
 
 end

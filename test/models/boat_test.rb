@@ -2,6 +2,7 @@ require 'test_helper'
 
 class BoatTest < ActiveSupport::TestCase
 
+=begin
   def setup
     @user = users(:corey)
     @boat = @user.boats.build(name: 'The Hog', location: 'Newport', length: 30, user_id: @user.id)
@@ -30,5 +31,6 @@ class BoatTest < ActiveSupport::TestCase
     @boat.length = nil
     assert_not @boat.valid?
   end
+=end
 
 end

@@ -5,7 +5,7 @@ class Api::BoatsController < ActionController::API
   def create
     @user = User.find(params[:id])
     if @user
-      @boat = @user.boats.build(boat_params)
+      @boat = @user.build_boat(boat_params)
       if @boat.save
         render json: @boat, status: :accepted
       else 
