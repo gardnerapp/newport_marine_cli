@@ -2,8 +2,6 @@ require 'test_helper'
 
 class Api::UsersControllerTest < ActionDispatch::IntegrationTest
 
-  # TODO Figure Out How to Work W JSON
-
   def setup
     @user = {
       name: 'corey', 
@@ -22,10 +20,24 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_not user.remember_token
   end
 
+  test 'Token decrypts to Digest in DB' do
+    post api_users_path, params: {
+      user: @user
+    }
+    token = JSON.parse(@response.body)['token']
+    user = User.last
+    assert user.authenticated? token
+  end
+
+
   test 'Correct JSON & Status Returned From User Creation' do
     post api_users_path, params: { 
       user: @user 
     }
+    response = JSON.parse(@response.body)
+    assert_equal @user[:name], response['name']
+    assert_equal @user[:email], response['email']
+    assert_equal @user[:phone], response['phone']
     assert_response 202
   end
 
@@ -33,15 +45,12 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
     assert_difference 'User.count' do
       post api_users_path, params: { user: @user }
     end
-
   end
 
   test 'Invalid submission returns unprocessable entity' do
     @user['password'] = nil
-    post api_users_path, params: { user: @user
-
-    }
+    post api_users_path, params: { user: @user}
     assert_response :unprocessable_entity
   end
-  
+
 end
