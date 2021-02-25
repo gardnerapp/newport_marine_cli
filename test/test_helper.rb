@@ -11,9 +11,9 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  module APIUser
+  module APIUserController
     def json_parse(response_body)
-      JSON.parse(response_body)
+      JSON.parse response_body
     end
     
     # post request to API
@@ -22,6 +22,17 @@ class ActiveSupport::TestCase
         user: user
       }
     end
+  end
+
+  module APISessions
+    include APIUserController
+    def login_user(user, password)
+      post api_login_path, params: { session: {
+        phone: user.phone,
+        password: password
+      }}
+    end
+
   end
 
 

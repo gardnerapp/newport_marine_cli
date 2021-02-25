@@ -2,9 +2,9 @@
 
 corey:
   name: Corey
-  email: example@example.com
-  phone: 4015364647
-  password_digest: foobar
+  email: example898jhbu@example.com
+  phone: 4010009942
+  password_digest: <%= User.digest('password') %>
 
 #one:
 #  name: MyString

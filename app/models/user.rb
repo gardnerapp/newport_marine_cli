@@ -13,6 +13,7 @@ class User < ApplicationRecord
   # 3. the auth method returns user if pWord is correct
   has_secure_password
 
+  # TODO test this stuff below
   # Remembers user in DB for Re-Authentication Before Actions
   # Digest is in DB, URL Safe to The APP
   def remember

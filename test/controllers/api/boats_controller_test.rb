@@ -2,9 +2,9 @@ require 'test_helper'
 
 class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
 
-=begin
+
   def setup
-    @user
+    # @user
     @boat = {
       name: "Sexy Hog",
       length: 40,
@@ -12,36 +12,25 @@ class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test 'Valid submission returns proper status code ' do
-    post api_boats_path, params: {
-      id: 1, # Do I Need to User a Fixture here
-      # Or should I do a user from existing
-      # initialzied in setup ??
-      boat: @boat
-    }
-    assert_response :accepted
-  end
-
-  test 'Valid submission creates Boat and belongs to proper user' do
-    assert_difference 'Boat.count' do
-      post api_boats_path, params: {
-        id: 1, # Do I Need to User a Fixture here
-        # Or should I do a user from existing
-        # initialzied in setup ??
-        boat: @boat
-      }
-    end
-    assert Boat.last.user_id == 1
-    #TODO assert boat belongs to correct user in here as well
-  end
-
-  test 'Valid userID, INvalid Boat fails' do
+  test 'Valid submission returns :accepted/202 ' do
 
   end
 
-  test 'invalid UserID, valid boat fails' do
+  test 'Valid submission creates Boat which belongs to user' do
 
   end
-=end
+
+  test 'Boat rendered in Json' do
+
+  end
+
+  test 'Improper authentication fails to create boat, 422 \:unprocessable_entity' do
+
+  end
+
+  test 'Bad data returns 422 \:unprocessable_entity' do
+
+  end
+
 
 end

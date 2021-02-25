@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Api::UsersControllerTest < ActionDispatch::IntegrationTest
 
-  include APIUser
+  include APIUserController
 
   def setup
     @user = {

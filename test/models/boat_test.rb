@@ -2,10 +2,10 @@ require 'test_helper'
 
 class BoatTest < ActiveSupport::TestCase
 
-=begin
+
   def setup
     @user = users(:corey)
-    @boat = @user.boats.build(name: 'The Hog', location: 'Newport', length: 30, user_id: @user.id)
+    @boat = @user.build_boat(name: 'The Hog', location: 'Newport', length: 30, user_id: @user.id)
   end
 
   test 'should be valid' do
@@ -18,12 +18,12 @@ class BoatTest < ActiveSupport::TestCase
   end
 
   test 'location should be present' do
-    @boat.location = " "*20
+    @boat.location = ' '*20
     assert_not @boat.valid?
   end
 
   test 'location should not be too long' do
-    @boat.location = "1"* 101
+    @boat.location = '1'* 101
     assert_not @boat.valid?
   end
 
@@ -31,6 +31,6 @@ class BoatTest < ActiveSupport::TestCase
     @boat.length = nil
     assert_not @boat.valid?
   end
-=end
+
 
 end

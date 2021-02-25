@@ -2,35 +2,31 @@ require 'test_helper'
 
 class Api::SessionsControllerTest < ActionDispatch::IntegrationTest
 
+  include APISessions
+
+  # TODO Make Boat For Fixture, assert that proper data
+  # and boat are present in response
+
   def setup
-    @user = User.new(
-      name: 'Corey', email: 'CoreyG123@example.com',
-      phone: '5556661122', password: 'foobardo',
-      password_confirmation: 'foobardo'
-    )
+    @user = users(:corey)
   end
 
-  test 'Valid Authentication updates token' do
-    post api_login_path, params: { session: {
-      phone: @user.phone,
-      password: @user.password }
-    }
-    assert_not @user.remember_token, 'Nil Remember Token After Valid Auth '
+  test 'Valid Authentication Updates Token & Token Decrypts to digest' do
+    login_user(@user, 'password')
+    token = json_parse(@response.body)['token']
+    assert_not token.nil?, 'Token is not present'
+    user = User.find_by(phone: @user.phone)
+    assert user.authenticated?(token), "Token doesn't match digest"
   end
 
   test 'Correct Authentication Returns Valid Response' do
-    post api_login_path, params: { session: {
-      phone: @user.phone, password: @user.password }
-    }
-    assert_response 202, "Valid Auth didn't return successful Response"
+    login_user(@user, 'password')
+    assert_response :success, 'Bad status upon valid authentication'
   end
-
+  
   test 'Invalid authentication correct Response' do
-    post api_login_path, params: {session: {
-      phone: @user.phone, password: @user.password
-    }}
-    assert_response 422, "Invalid Auth didn't return Correct Response"
+     login_user(@user, 'incorrect password')
+     assert_response 422
   end
-
 
 end
