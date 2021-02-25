@@ -2,6 +2,8 @@ require 'test_helper'
 
 class Api::UsersControllerTest < ActionDispatch::IntegrationTest
 
+  include APIUser
+
   def setup
     @user = {
       name: 'corey', 
@@ -13,28 +15,22 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
   end
   
   test 'Token Created Upon User Creation' do 
-    post api_users_path, params: {
-      user: @user 
-    }
+    create_user(@user)
     user = User.last
     assert_not user.remember_token
   end
 
   test 'Token decrypts to Digest in DB' do
-    post api_users_path, params: {
-      user: @user
-    }
-    token = JSON.parse(@response.body)['token']
+    create_user(@user)
+    token = json_parse(@response.body)['token']
     user = User.last
     assert user.authenticated? token
   end
 
 
   test 'Correct JSON & Status Returned From User Creation' do
-    post api_users_path, params: { 
-      user: @user 
-    }
-    response = JSON.parse(@response.body)
+    create_user(@user)
+    response = json_parse(@response.body)
     assert_equal @user[:name], response['name']
     assert_equal @user[:email], response['email']
     assert_equal @user[:phone], response['phone']
@@ -43,13 +39,13 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'Create should Change DB' do
     assert_difference 'User.count' do
-      post api_users_path, params: { user: @user }
+      create_user(@user)
     end
   end
 
   test 'Invalid submission returns unprocessable entity' do
     @user['password'] = nil
-    post api_users_path, params: { user: @user}
+    create_user(@user)
     assert_response :unprocessable_entity
   end
 

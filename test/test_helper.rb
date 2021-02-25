@@ -10,4 +10,20 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  module APIUser
+    def json_parse(response_body)
+      JSON.parse(response_body)
+    end
+    
+    # post request to API
+    def create_user(user)
+      post api_users_path, params: {
+        user: user
+      }
+    end
+  end
+
+
+
 end
