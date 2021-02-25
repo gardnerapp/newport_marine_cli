@@ -11,11 +11,14 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  module APIUserController
+  module JsonHelper
     def json_parse(response_body)
       JSON.parse response_body
     end
-    
+  end
+
+  module APIUserController
+    include JsonHelper
     # post request to API
     def create_user(user)
       post api_users_path, params: {
@@ -24,13 +27,35 @@ class ActiveSupport::TestCase
     end
   end
 
-  module APISessions
-    include APIUserController
+  module APISessionsController
+    include JsonHelper
     def login_user(user, password)
       post api_login_path, params: { session: {
         phone: user.phone,
         password: password
       }}
+    end
+  end
+
+  module APIBoatController
+    include APIUserController
+
+    def create_boat(user, boat)
+      @user.remember
+      post api_boats_path, params: {
+        id: user.id,
+        token: user.remember_token,
+        boat: boat
+      }
+    end
+
+    def create_faulty_boat(user, boat)
+      @user.remember
+      post api_boats_path, params: {
+        id: user.id,
+        token: 'Not the Actual Token',
+        boat: boat
+      }
     end
 
   end

@@ -6,15 +6,15 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = {
-      name: 'corey', 
+      name: 'corey',
       email: '123youareahog@example.com',
-      phone: '9098088877', 
-      password: 'foobar', 
+      phone: '9098088877',
+      password: 'foobar',
       password_confirmation: 'foobar'
     }
   end
-  
-  test 'Token Created Upon User Creation' do 
+
+  test 'Token Created Upon User Creation' do
     create_user(@user)
     user = User.last
     assert_not user.remember_token

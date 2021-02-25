@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Api::SessionsControllerTest < ActionDispatch::IntegrationTest
 
-  include APISessions
+  include APISessionsController
 
   # TODO Make Boat For Fixture, assert that proper data
   # and boat are present in response

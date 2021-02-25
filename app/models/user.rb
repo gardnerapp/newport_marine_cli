@@ -33,7 +33,7 @@ class User < ApplicationRecord
     # Returns a hash digest of a given String
     def digest(str)
       cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
-      BCrypt::Password.create(str, cost:cost )
+      BCrypt::Password.create(str, cost: cost )
     end
 
     # returns a random token

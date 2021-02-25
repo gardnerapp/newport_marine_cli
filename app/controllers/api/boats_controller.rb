@@ -3,9 +3,8 @@ class Api::BoatsController < ActionController::API
   # need some way to validate to make sure that the boat is not being created by someone without authentication
 
   def create
-    # TODO auth user with token here
-    @user = User.find(params[:id])
-    if @user
+    @user = User.find_by(params[:id])
+    if @user.authenticated?(params[:token])
       @boat = @user.build_boat(boat_params)
       if @boat.save
         render json: @boat, status: :accepted
