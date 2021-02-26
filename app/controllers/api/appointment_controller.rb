@@ -1,5 +1,6 @@
 class Api::AppointmentController < ActionController::API
 
+  # TODO Authenticate with Token before actions
   # POST api/appointments
   def create
     @appointment = Appointment.new(appointment_params)
@@ -13,8 +14,9 @@ class Api::AppointmentController < ActionController::API
   # GET api/appointments/
   # NOT INDEX OF ALL APPOINTMENTS
   # Just the Appointments for User of Type ID
+  # Only get the ones from the Future
   def index
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(appointment_index_params)
     @appointments = @user.appointments.all
     if @appointments
       render json: @appointments, status: :accepted
@@ -25,7 +27,11 @@ class Api::AppointmentController < ActionController::API
 
   private
   def appointment_params
-    params.require(:appointment).permit(:time, :user_id, :total, :services)
+    params.require(:appointment)
+  end
+
+  def appointment_index_params
+    params.require(:id)
   end
 
 end
