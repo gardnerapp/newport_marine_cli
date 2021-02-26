@@ -1,7 +1,5 @@
 class Api::BoatsController < ActionController::API
 
-  # need some way to validate to make sure that the boat is not being created by someone without authentication
-
   def create
     @user = User.find_by(params[:id])
     if @user.authenticated?(params[:token])
@@ -19,6 +17,8 @@ class Api::BoatsController < ActionController::API
   private
 
   def boat_params
+    # How to sanatize multiple parameters
+    # params.require(:user_data).permit :user_id, :token
     params.require(:boat).permit(:name, :location, :length)
   end
 end

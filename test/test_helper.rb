@@ -38,10 +38,10 @@ class ActiveSupport::TestCase
   end
 
   module APIBoatController
-    include APIUserController
+    include JsonHelper
 
     def create_boat(user, boat)
-      @user.remember
+      user.remember
       post api_boats_path, params: {
         id: user.id,
         token: user.remember_token,
@@ -50,7 +50,7 @@ class ActiveSupport::TestCase
     end
 
     def create_faulty_boat(user, boat)
-      @user.remember
+      user.remember
       post api_boats_path, params: {
         id: user.id,
         token: 'Not the Actual Token',
