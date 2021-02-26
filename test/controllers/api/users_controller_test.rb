@@ -28,7 +28,7 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test 'Correct JSON & Status Returned From User Creation' do
+  test 'Correct JSON & Status 202 :accepted Returned From User Creation' do
     create_user(@user)
     response = json_parse(@response.body)
     assert_equal @user[:name], response['name']
@@ -43,7 +43,7 @@ class Api::UsersControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'Invalid submission returns unprocessable entity' do
+  test 'Invalid submission returns 422 :unprocessable_entity' do
     @user['password'] = nil
     create_user(@user)
     assert_response :unprocessable_entity

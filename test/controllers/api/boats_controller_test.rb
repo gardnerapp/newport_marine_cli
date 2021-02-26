@@ -13,7 +13,7 @@ class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test 'Valid submission returns :accepted/202 ' do
+  test 'Valid submission returns :accepted 202 ' do
     create_boat(@user, @boat)
     assert_response :success
   end
@@ -32,18 +32,18 @@ class Api::BoatsControllerTest < ActionDispatch::IntegrationTest
     assert_equal @boat[:length], response['length']
   end
 
-  test 'Improper authentication fails to create boat, 422 \:unprocessable_entity' do
+  test 'Improper authentication fails to create boat, 422 :unprocessable_entity' do
     assert_no_difference 'Boat.count' do
       create_faulty_boat(@user, @boat)
     end
-    assert_response 422, "Boat was created without valid token authentication"
+    assert_response 422, 'Boat was created without valid token authentication'
   end
 
-  test 'Bad data returns 422 \:unprocessable_entity' do
+  test 'Bad data returns 422 :unprocessable_entity' do
     create_boat(@user, {
-      name: ""
+      name: ''
     })
-    assert_response 422, "Faulty Data Slipped Through"
+    assert_response 422, 'Faulty Data Slipped Through'
   end
 
 end

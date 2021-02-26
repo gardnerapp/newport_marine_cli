@@ -24,7 +24,7 @@ class Api::SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success, 'Bad status upon valid authentication'
   end
   
-  test 'Invalid authentication correct Response' do
+  test 'Invalid authentication returns status 422 :unprocessable entity' do
      login_user(@user, 'incorrect password')
      assert_response 422
   end
