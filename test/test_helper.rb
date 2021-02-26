@@ -30,7 +30,7 @@ class ActiveSupport::TestCase
   module APISessionsController
     include JsonHelper
     def login_user(user, password)
-      post api_login_path, params: { session: {
+      post api_login_path, params: { user: {
         phone: user.phone,
         password: password
       }}
