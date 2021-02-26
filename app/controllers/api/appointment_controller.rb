@@ -4,9 +4,9 @@ class Api::AppointmentController < ActionController::API
   def create
     @appointment = Appointment.new(appointment_params)
     if @appointment.save
-      render json: @appointment, status: :ok
+      render json: @appointment, status: :accepted
     else
-      render json: @appointment.errors, status: :ok
+      render json: @appointment.errors, status: :unprocessable_entity
     end
   end
 
@@ -17,7 +17,7 @@ class Api::AppointmentController < ActionController::API
     @user = User.find_by(params[:user_id])
     @appointments = @user.appointments.all
     if @appointments
-      render json: @appointments, status: :ok
+      render json: @appointments, status: :accepted
     else
       render json: @appointments.errors, status: :unprocessable_entity
     end
@@ -25,7 +25,7 @@ class Api::AppointmentController < ActionController::API
 
   private
   def appointment_params
-    params.require(:appointment).permit(:time, :user_id)
+    params.require(:appointment).permit(:time, :user_id, :total, :services)
   end
 
 end
