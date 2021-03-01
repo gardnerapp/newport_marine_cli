@@ -7,7 +7,7 @@ class Api::AppointmentController < ActionController::API
     if @appointment.save
       render json: @appointment, status: :accepted
     else
-      render json: @appointment.errors, status: :unprocessable_entity
+      render json: @appointment.errors.inspect, status: :unprocessable_entity
     end
   end
 
@@ -26,12 +26,13 @@ class Api::AppointmentController < ActionController::API
   end
 
   private
-  def appointment_params
-    params.require(:appointment)
-  end
 
   def appointment_index_params
     params.require(:id)
+  end
+
+  def appointment_params
+    params.require(:appointment)
   end
 
 end

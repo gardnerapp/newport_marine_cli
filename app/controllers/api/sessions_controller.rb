@@ -5,11 +5,13 @@ class Api::SessionsController < ActionController::API
     @user = User.find_by(phone: session_params[:phone])
     if @user&.authenticate(session_params[:password])
       @user.remember
-      render json: { name: @user.name,
-                     email: @user.email,
-                     phone: @user.phone,
-                     boat: @user.boat,
-                     token: @user.remember_token }, status: :accepted
+      render json: {
+        id: @user.id,
+        name: @user.name,
+        email: @user.email,
+        phone: @user.phone,
+        boat: @user.boat,
+        token: @user.remember_token }, status: :accepted
     else
       render json: 'no user', status: :unprocessable_entity
     end

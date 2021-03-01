@@ -8,7 +8,8 @@ class Api::UsersController < ActionController::API
     @user = User.new(user_params)
     if @user.save
       @user.remember
-      render json: { name: @user.name,
+      render json: { id: @user.id,
+                     name: @user.name,
                      email: @user.email,
                      phone: @user.phone,
                      boat: @user.boat,

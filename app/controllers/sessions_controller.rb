@@ -12,4 +12,7 @@ class SessionsController < ApplicationController
       render json: {message: "No User Found"}
     end
   end
+
+
+
 end
