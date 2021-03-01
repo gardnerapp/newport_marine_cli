@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_133722) do
+ActiveRecord::Schema.define(version: 2021_03_01_135121) do
 
   create_table "appointments", force: :cascade do |t|
     t.datetime "time"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_03_01_133722) do
     t.float "total"
     t.string "title"
     t.string "additional_instructions"
+    t.json "services"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 
