@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
+  root 'application#home'
   resources :appointments
   namespace :api do
-    resources :appointment, only: %i[create index]
+    resources :appointments, only: %i[create index]
   end
   namespace :api do
     resources :boats, only: :create
   end
   namespace :api do
-    resources :users, only: %i[create show update]
+    resources :users, only: :create
   end
   resources :users
   post '/api/login', to: 'api/sessions#create'

@@ -1,38 +1,54 @@
-class Api::AppointmentController < ActionController::API
-
-  # TODO Authenticate with Token before actions
+class Api::AppointmentsController < ActionController::API
+  # todo add boolean is_paid col to appointments
+  # Todo if wash do stuff for weekly & daily
   # POST api/appointments
+  # if @appointment.title == 'Daily' || 'Weekly'
+  # 1. set last week of operations
+  # 2. for each week from present create wash
+  # normal save in else
   def create
-    @appointment = Appointment.new(appointment_params)
-    if @appointment.save
-      render json: @appointment, status: :accepted
+    @user = User.find_by(id: appointment_params[:user_id])
+    if @user&.authenticated?(params[:token])
+      @appointment = Appointment.new(appointment_params)
+      # if daily, weekly here
+      if @appointment.save
+        render json: @appointment, status: :accepted
+      else
+        render json: @appointment.errors.inspect, status: :unprocessable_entity
+      end
     else
-      render json: @appointment.errors.inspect, status: :unprocessable_entity
+      render json: 'Unable to Authenticate', status: :unprocessable_entity
     end
   end
 
   # GET api/appointments/
   # NOT INDEX OF ALL APPOINTMENTS
   # Just the Appointments for User of Type ID
-  # Only get the ones from the Future
   def index
-    @user = User.find_by(appointment_index_params)
-    @appointments = @user.appointments.all
-    if @appointments
-      render json: @appointments, status: :accepted
+    @user = User.find_by(index_params[:id])
+    if @user&.authenticated?(index_params[:token])
+      @appointments = @user.appointments.all
+      if @appointments
+        render json: @appointments, status: :accepted
+      else
+        render json: @appointments.errors, status: :unprocessable_entity
+      end
     else
-      render json: @appointments.errors, status: :unprocessable_entity
+      render json: 'unable to authenticate', status: :unprocessable_entity
     end
   end
 
   private
 
-  def appointment_index_params
-    params.require(:id)
+  # todo private method for setting and authenticating user
+  # might just go in helper
+
+  def index_params
+    params.require(:user).permit(%i[id token])
   end
 
   def appointment_params
-    params.require(:appointment).permit(%i[time title total user_id services additional_instructions])
+    params.require(:appointment).permit(%i[time title total user_id services additional_instructions token])
   end
 
 end
