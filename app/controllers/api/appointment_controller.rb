@@ -32,7 +32,7 @@ class Api::AppointmentController < ActionController::API
   end
 
   def appointment_params
-    params.require(:appointment)
+    params.require(:appointment).permit(%i[time title total user_id services additional_instructions])
   end
 
 end
