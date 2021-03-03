@@ -1,15 +1,5 @@
 <p id="notice"><%= notice %></p>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3 offset-4">
-      <% if @appointment.is_paid %>
-        <strong class="paid">PAID</strong>
-        <% else %>
-      <strong class="unpaid">NOT PAID</strong>
-        <%end  %>
-    </div>
-  </div>
-</div>
+
 <div class="container flex">
   <div class="row p-2">
     <div class="col">
@@ -27,6 +17,9 @@
     <div class="col">
       <strong> Total </strong>
     </div>
+    <div class="col">
+      <strong> Status </strong>
+    </div>
   </div>
   <div class="row p-2">
     <div class="col-md">
@@ -43,6 +36,61 @@
     </div>
     <div class="col-md">
       <b><p class="paid"> $ <%= @appointment.total %> </p></b>
+    </div>
+    <div class="col">
+      <% if @appointment.is_paid %>
+        <strong class="paid">PAID</strong>
+      <% else %>
+        <strong class="unpaid">NOT PAID</strong>
+      <%end  %>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="row p-2">
+    <div class="col">
+      <strong> User </strong>
+    </div>
+    <div class="col">
+      <strong> Phone </strong>
+    </div>
+    <div class="col">
+      <strong> Email </strong>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <p> <%= link_to @user.name, @user %></p>
+    </div>
+    <div class="col">
+      <p> <%= @user.phone %></p>
+    </div>
+    <div class="col">
+      <p> <%= @user.email %></p>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="row p-2">
+    <div class="col">
+      <strong> Boat </strong>
+    </div>
+    <div class="col">
+      <strong> Length </strong>
+    </div>
+    <div class="col">
+      <strong> Location </strong>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col">
+      <p><%= @boat.name %></p>
+    </div>
+    <div class="col">
+      <p><%= @boat.length %></p>
+    </div>
+    <div class="col">
+      <p><%= @boat.location %></p>
     </div>
   </div>
 </div>
