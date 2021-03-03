@@ -1,14 +1,81 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 offset-4">
+      <% if @appointment.is_paid %>
+        <strong class="paid">PAID</strong>
+        <% else %>
+      <strong class="unpaid">NOT PAID</strong>
+        <%end  %>
+    </div>
+  </div>
+</div>
+<div class="container flex">
+  <div class="row">
+    <div class="col">
+      <strong> Appointment </strong>
+    </div>
+    <div class="col">
+      <strong> Time </strong>
+    </div>
+    <div class="col">
+      <strong> User </strong>
+    </div>
+    <div class="col">
+      <strong> Phone </strong>
+    </div>
+    <div class="col">
+      <strong> Boat </strong>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <div class="col">
+      <p>
+        <%= @appointment.title %>
+      </p>
+    </div>
+    <div class="col">
+      <p>
+        <%= @appointment.time %>
+      </p>
+    </div>
+    <div class="col">
+      <p>
+        <%= link_to @user.name, @user %>
+      </p>
+    </div>
+    <div class="col">
+      <p>
+        <%= @user.phone %>
+      </p>
+    </div>
+    <div class="col">
+      <p>
+        <%=  @boat.name %>
+      </p>
+    </div>
+  </div>
+  <div class="container flex">
+    <div class="row">
+      <div class="col">
+    <strong> Additional Instructions: </strong>
+    <p><%= @appointment.additional_instructions %></p>
+      </div>
+      <div class="col">
+        <strong> Services: </strong>
+        <p> <%= @appointment.services  %> </p>
+      </div>
+      <div class="col">
+        <strong> Location </strong>
+        <p> <%= @boat.location %></p>
+      </div>
+      <div class="col">
+        <strong> Length </strong>
+        <p> <%= @boat.length %> ft </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Time:</strong>
-  <%= @appointment.time %>
-</p>
 
-<p>
-  <strong>User:</strong>
-  <%= @appointment.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
-<%= link_to 'Back', appointments_path %>
+<%= link_to 'Edit', edit_appointment_path(@appointment) %>

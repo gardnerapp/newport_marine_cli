@@ -1,5 +1,4 @@
 class Api::AppointmentsController < ActionController::API
-  # todo add boolean is_paid col to appointments
   # Todo if wash do stuff for weekly & daily
   # POST api/appointments
   # if @appointment.title == 'Daily' || 'Weekly'

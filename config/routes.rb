@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'application#home'
-  resources :appointments
+  resources :appointments, only: %i[show edit update destroy]
   namespace :api do
     resources :appointments, only: %i[create index]
   end

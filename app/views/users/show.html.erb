@@ -1,0 +1,60 @@
+<div class="container flex">
+  <div class="row p-2">
+    <div class="col-md">
+      <strong>Name:</strong>
+    </div>
+    <div class="col-md">
+      <strong>Phone:</strong>
+    </div>
+    <div class="col-md">
+      <strong>Email:</strong>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col-md">
+      <%= @user.name %>
+    </div>
+    <div class="col-md">
+      <%= @user.phone %>
+    </div>
+    <div class="col-md">
+      <%= @user.email %>
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container flex">
+  <div class="row p-2">
+    <div class="col-md">
+      <strong>Boat Name:</strong>
+    </div>
+    <div class="col-md">
+      <strong>Length:</strong>
+    </div>
+    <div class="col-md">
+      <strong>Location:</strong>
+    </div>
+  </div>
+  <div class="row p-2">
+    <div class="col-md">
+      <%= @boat.name %>
+    </div>
+    <div class="col-md">
+      <%= @boat.location %>
+    </div>
+    <div class="col-md">
+      <%= @boat.length %> ft
+    </div>
+  </div>
+</div>
+<br/>
+<div class="container">
+  <div class="row">
+    <h4> Appointments: </h4>
+    <div class="col-md-6 offset-2">
+      <% @appointments.each do |appointment| %>
+      <%= link_to appointment.id, appointment %>
+      <% end %>
+    </div>
+  </div>
+</div>
