@@ -11,7 +11,7 @@
   </div>
 </div>
 <div class="container flex">
-  <div class="row">
+  <div class="row p-2">
     <div class="col">
       <strong> Appointment </strong>
     </div>
@@ -19,60 +19,30 @@
       <strong> Time </strong>
     </div>
     <div class="col">
-      <strong> User </strong>
+      <strong> Additional Instructions </strong>
     </div>
     <div class="col">
-      <strong> Phone </strong>
+      <strong> Services </strong>
     </div>
     <div class="col">
-      <strong> Boat </strong>
+      <strong> Total </strong>
     </div>
   </div>
-  <div class="row pt-3">
-    <div class="col">
-      <p>
-        <%= @appointment.title %>
-      </p>
+  <div class="row p-2">
+    <div class="col-md">
+      <p> <%= @appointment.title %> </p>
     </div>
-    <div class="col">
-      <p>
-        <%= @appointment.time %>
-      </p>
+    <div class="col-md">
+      <p> <%= @appointment.time %> </p>
     </div>
-    <div class="col">
-      <p>
-        <%= link_to @user.name, @user %>
-      </p>
+    <div class="col-md">
+      <p> <%= @appointment.additional_instructions %> </p>
     </div>
-    <div class="col">
-      <p>
-        <%= @user.phone %>
-      </p>
+    <div class="col-md">
+      <p> <%= @appointment.services %> </p>
     </div>
-    <div class="col">
-      <p>
-        <%=  @boat.name %>
-      </p>
-    </div>
-  </div>
-  <div class="container flex">
-    <div class="row">
-      <div class="col">
-    <strong> Additional Instructions: </strong>
-    <p><%= @appointment.additional_instructions %></p>
-      </div>
-      <div class="col">
-        <strong> Services: </strong>
-        <p> <%= @appointment.services  %> </p>
-      </div>
-      <div class="col">
-        <strong> Location </strong>
-        <p> <%= @boat.location %></p>
-      </div>
-      <div class="col">
-        <strong> Length </strong>
-        <p> <%= @boat.length %> ft </p>
-      </div>
+    <div class="col-md">
+      <b><p class="paid"> $ <%= @appointment.total %> </p></b>
     </div>
   </div>
 </div>
