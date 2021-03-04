@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   end
   resources :users
   post '/api/login', to: 'api/sessions#create'
-  # TODO write test for api sessions, create, show, update
+  resources :password_resets, only: %i[create edit update]
+  get '/success', to: 'password_resets#success'
  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

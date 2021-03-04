@@ -1,39 +1,37 @@
+# frozen_string_literal: true
 require 'test_helper'
 
 class Api::AppointmentsControllerTest < ActionDispatch::IntegrationTest
-
+  include APIAppointmentController
   def setup
     @user = users :corey
     @appointment = {
       time: Time.now,
       title: 'wash',
-      total: 60000.00,
+      total: 60_000.00,
       user_id: @user.id,
       services: {}.as_json,
       additional_instructions: 'walk cooper',
-      token: @user.remember_token
     }
   end
 
-  # TODO api Appointments_path helper not available
-  # reset routes and manually regenerate controller
-
-  test 'User should be Authenticated before creating appointment' do
+  test 'User Is Authenticated before appointment, count changes in the database' do
     assert_difference 'Appointment.count' do
-      post api_appointments_path, params: {
-        appointment: @appointment,
-        token: @user.remember_token
-      }
+      set_appointment @user, @appointment
     end
   end
 
-  test 'Invalid Authentication during create returns correct message, status code 422/:unprocessable_entity' do
-
+  test 'Invalid Authentication fails to create appointment and returns status code 422/:unprocessable_entity' do
+    assert_no_difference 'Appointment.count' do
+      @user.remember
+      post api_appointments_path, params: {
+        appointment: @appointment,
+        token: "hog"
+      }
+    end
+    assert_response 422
   end
 
-  test 'Invalid Appointment params does not save appointment & renders status code 422/:unprocessable_entity' do
-
-  end
 
   test 'User should be Authenticated before Indexing' do
 
@@ -43,8 +41,5 @@ class Api::AppointmentsControllerTest < ActionDispatch::IntegrationTest
 
   end
 
-  test 'Only upcoming appointments rendered by index' do
-
-  end
 
 end
