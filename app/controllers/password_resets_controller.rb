@@ -24,12 +24,12 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    # TODO Look IN Book Edit to see if I need to add any flashing to the views
     if params[:user][:email].empty?
       @user.errors.add(:password, "Can't be empty")
       render 'edit'
     elsif @user.update(user_params)
-      redirect_to success_path
+      flash[:success] = "Password Succesfful Reset"
+      redirect_to
     else
       render 'edit'
     end
@@ -37,7 +37,13 @@ class PasswordResetsController < ApplicationController
 
   def success
   end
-  
+
+  # TODO get Customer Service
+  def error
+  end
+
+
+
   private
 
   def user_params

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post '/api/login', to: 'api/sessions#create'
   resources :password_resets, only: %i[create edit update]
   get '/success', to: 'password_resets#success'
+  get '/error', to: 'password_resets#error'
+
  
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

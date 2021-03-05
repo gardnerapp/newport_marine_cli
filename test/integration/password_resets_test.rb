@@ -21,16 +21,19 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
 
     # Wrong email 
     get edit_password_reset_path(user.reset_token, email: '')
-    # TODO assert redirectd to error
+    assert_redirected_to 'password_resets/error'
 
     # Right email wrong token 
     get edit_password_reset_path('Nota valid token by any means dawg', email: user.email)
-    # TODO assert redirected to error
+    assert_not flash.empty? # TODO make the redirect go to something else
+    assert_redirected_to 'password_resets/success'
 
     # right email right token
     get edit_password_reset_path(@user.reset_token, email: @user.email)
     assert_template 'password_resets/edit'
     assert_select 'input[name=email][type=hidden][value=?]', user.email
+    assert_not flash.empty? # TODO make the redirect go to something else
+    assert_redirected_to 'password_resets/success'
 
     # invalid password & confirmation
     patch password_reset_path(user.reset_token), params: {
