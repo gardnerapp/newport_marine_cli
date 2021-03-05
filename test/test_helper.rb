@@ -11,6 +11,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
+
   module JsonHelper
     def json_parse(response_body)
       JSON.parse response_body

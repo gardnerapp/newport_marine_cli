@@ -1,13 +1,15 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[show edit update destroy]
-  
+
+  # TODO Define Unpaid Action
+  # TODO ADD JQUEARY for Navrbar burger sess page 404
+
   # GET /appointments/1
   # GET /appointments/1.json
   def show
     @user = User.find_by(id: @appointment.user_id)
     @boat = @user.boat
   end
-
 
   # GET /appointments/1/edit
   def edit
