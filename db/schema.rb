@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_133359) do
+ActiveRecord::Schema.define(version: 2021_03_05_184558) do
 
   create_table "appointments", force: :cascade do |t|
     t.datetime "time"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 2021_03_03_133359) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "remember_digest"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
