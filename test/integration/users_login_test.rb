@@ -5,14 +5,18 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   def setup 
     @user = users :corey
   end
-  # Config so that it only works w admins
+
+  test 'Root redirects to home for non logged in user' do
+    get root_path
+    assert_redirected_to login_path
+  end
+
   test 'Login with invalid information' do
     get login_path
     assert_template 'sessions/new'
     post login_path, params: { session: { email: '', password: '' } }
     assert_not is_logged_in?
-    assert_redirected_to login_path
-    assert_not flash.empty?
+    assert_template 'sessions/new'
   end
 
   test 'Login with valid information followed by logout' do
@@ -25,12 +29,17 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_template 'layouts/home'
     assert_select 'a[href=?]', login_path, count: 0 
     assert_select 'a[href=?]', logout_path
-    # TODO assert_seleclt other nav item links when logged in
-    # make fixture an admin
+    assert_select 'a[href=?]', revenue_path
+    assert_select 'a[href=?]', unpaid_path
+    assert_select 'a[href=?]', root_path
     delete login_path
     assert_redirected_to login_path
     follow_redirect!
-    # TODO assert_seleclt other nav item links when logged in
+    assert_select 'a[href=?]', login_path
+    assert_select 'a[href=?]', logout_path, count: 0
+    assert_select 'a[href=?]', revenue_path, count: 0
+    assert_select 'a[href=?]', unpaid_path, count: 0
+    assert_select 'a[href=?]', root_path
   end
 
   test 'login with valid email, invalid password' do 

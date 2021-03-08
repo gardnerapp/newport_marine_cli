@@ -1,9 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
+# todo generate a bunch of fixtures
 one:
   time: 2021-02-16 08:59:38
-  user: one
+  user_id: 1
+  total: 88
+  title: Full Detail
+  additional_instructions: be a hog
+  services: {}
+  is_paid: true
 
 two:
-  time: 2021-02-16 08:59:38
-  user: two
+  time: 2021-05-16 08:50:38
+  user_id: 2
+  total: 69
+  title: Wash
+  additional_instructions: be a hog
+  services: {}
+  is_paid: false

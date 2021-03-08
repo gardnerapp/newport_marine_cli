@@ -51,14 +51,13 @@ class AppointmentsController < ApplicationController
   end
 
   def revenue
-    @appointments = Appointment.count
+    @appointments = Appointment.all.count
     @customers = User.count
-    # accumulator methods
-    @dollars = Appointment.all.reduce(0) {|sum,n| sum + n.total}
+    @dollars = Appointment.all.reduce(0) { |sum, n| sum + n.total }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
   def set_appointment
     @appointment = Appointment.find(params[:id])
   end

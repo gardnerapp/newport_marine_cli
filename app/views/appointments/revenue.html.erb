@@ -1,3 +1,16 @@
-<h1> <%= @count %> Appointments </h1>
-<h1> <%= @customers %> Customers </h1>
-<h1> $ <%= @dollars %> Dollars </h1>
+<div class="container">
+  <div class="row justify-content-center pt-5 text-center pb-5">
+    <div class="col-md-4">
+      <h1>Appointments</h1>
+      <h2><%= @appointments %></h2>
+    </div>
+    <div class="col-md-4">
+      <h1>Customers</h1>
+      <h2><%= @customers %> </h2>
+    </div>
+    <div class="col-md-4">
+      <h1>Total Revenue </h1>
+      <h2>$ <%= @dollars %></h2>
+    </div>
+  </div>
+</div>
