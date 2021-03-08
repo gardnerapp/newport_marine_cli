@@ -1,8 +1,16 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
+
+  # Go to home, if not signed in redirect to sessions/new
+  # if signed in render admin home screen
+
   def home
-    # TOOD If User logged in display something if not display fuck u
-    @appointments = Appointment.all
-    render 'layouts/home'
+    if current_user == nil
+      redirect_to login_path
+    else
+      @appointments = Appointment.all
+      render 'layouts/home'
+    end
   end
+
 end

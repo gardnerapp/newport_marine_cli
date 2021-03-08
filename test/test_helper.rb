@@ -12,7 +12,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def is_logged_in?
-    !session[:user_id].nil?
+    !session[:user_id].nil? && User.find_by(id: session[:user_id]).is_admin?
   end
 
   module JsonHelper

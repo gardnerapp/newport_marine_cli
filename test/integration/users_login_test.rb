@@ -11,12 +11,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_template 'sessions/new'
     post login_path, params: {session: {email: '', password: ''}}
     assert_not is_logged_in?
-    assert_template 'sessions/new'
+    assert_redirected_to login_path
     assert_not flash.empty?
-    get root_path
-    assert flash.empty?
   end
-  
+
   test 'Login with valid information followed by logout' do
     get login_path 
     assert_template 'sessions/new'
@@ -46,8 +44,10 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
     # TODO assert that the navbar links are correct IN all of the test
   end
-  
-  test 'login with valid info but user != admin' do
+
+  # Todo create appointment fixtures, then move to asserting that user is admin in controller
+  test 'Failed login if user is not admin' do
 
   end
+
 end
