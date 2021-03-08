@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'appointments#index'
   resources :appointments, only: %i[show edit update destroy]
   get '/unpaid', to: 'appointments#unpaid'
+  get '/revenue', to: 'appointments#revenue'
   namespace :api do
     resources :appointments, only: %i[create index]
   end

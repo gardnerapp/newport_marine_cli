@@ -8,11 +8,8 @@ class AppointmentsController < ApplicationController
   end
 
   def unpaid
-    if current_user == nil
-      redirect_to login_path
-    else
-      @appointments = Appointment.where(is_paid: false)
-    end
+    @appointments = Appointment.where(is_paid: false)
+    @count = @appointments.count
   end
 
   # GET /appointments/1
@@ -47,6 +44,17 @@ class AppointmentsController < ApplicationController
       format.html { redirect_to root_path, notice: 'Appointment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def n
+    # code here
+  end
+
+  def revenue
+    @appointments = Appointment.count
+    @customers = User.count
+    # accumulator methods
+    @dollars = Appointment.all.reduce(0) {|sum,n| sum + n.total}
   end
 
   private
