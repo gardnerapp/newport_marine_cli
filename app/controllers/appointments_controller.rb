@@ -1,8 +1,22 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[show edit update destroy]
-
-  # TODO Define Unpaid Action
   # TODO ADD JQUEARY for Navrbar burger sess page 404
+
+  def index
+    if current_user == nil
+      redirect_to login_path
+    else
+      @appointments = Appointment.all
+    end
+  end
+
+  def unpaid
+    if current_user == nil
+      redirect_to login_path
+    else
+      @appointments = Appointment.where(is_paid: false)
+      end
+  end
 
   # GET /appointments/1
   # GET /appointments/1.json
@@ -12,8 +26,7 @@ class AppointmentsController < ApplicationController
   end
 
   # GET /appointments/1/edit
-  def edit
-  end
+  def edit; end
 
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
@@ -49,4 +62,5 @@ class AppointmentsController < ApplicationController
   def appointment_params
     params.require(:appointment).permit(:time, :user_id, :services,)
   end
+
 end

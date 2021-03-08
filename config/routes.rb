@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  root 'application#home'
+  root 'appointments#index'
   resources :appointments, only: %i[show edit update destroy]
+  get '/unpaid', to: 'appointments#unpaid'
   namespace :api do
     resources :appointments, only: %i[create index]
   end
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
   end
   resources :users
   post '/api/login', to: 'api/sessions#create'
-  # TODO write test for api sessions, create, show, update
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'

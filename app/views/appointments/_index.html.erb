@@ -1,34 +1,29 @@
-<% %>
-<div class="container">
-  <div class="col-md-6 offset-4 pt-2">
-    <h1>Appointments</h1>
-  </div>
-  <div class="container flex">
-    <br/>
-    <div class="row">
-      <div class="col">
-        <h5>ID</h5>
-      </div>
-      <div class="col">
-        <h5>User</h5>
-      </div>
-      <div class="col">
-        <h5>Time</h5>
-      </div>
-      <div class="col">
-        <h5>Location</h5>
-      </div>
-      <div class="col">
-        <h5>Total</h5>
-      </div>
-      <div class="col">
-        <h5>Status</h5>
-      </div>
+<div class="container flex">
+  <br/>
+  <div class="row">
+    <div class="col">
+      <h5>ID</h5>
     </div>
-    <br/>
+    <div class="col">
+      <h5>User</h5>
+    </div>
+    <div class="col">
+      <h5>Time</h5>
+    </div>
+    <div class="col">
+      <h5>Location</h5>
+    </div>
+    <div class="col">
+      <h5>Total</h5>
+    </div>
+    <div class="col">
+      <h5>Status</h5>
+    </div>
   </div>
-  <%= @appointments.each do |appointment| %>
-    <div class="container flex">
+  <br/>
+</div>
+<%= @appointments.each do |appointment| %>
+  <div class="container flex">
     <div class="row">
       <div class="col">
         <p> <%= link_to appointment.id, appointment %> </p>
@@ -55,6 +50,6 @@
         </div>
       <% end %>
     </div>
-    </div>
-  <% end  %>
+  </div>
+<% end  %>
 </div>
