@@ -3,7 +3,7 @@ module SessionsHelper
   # logins a given user
   def log_in(user)
     # only logs in users that are admins
-    session[:user_id] = user.id if User.find_by(id: user.id).is_admin?
+    session[:user_id] = user.id if User.find_by(id: user.id)&.is_admin?
   end
 
   def current_user
@@ -16,7 +16,7 @@ module SessionsHelper
   # is user logged in?
   # if current_is exist & is_admin it exist
   def logged_in?
-    @current_user&.is_admin?
+    !@current_user.nil?
   end
 
   def log_out

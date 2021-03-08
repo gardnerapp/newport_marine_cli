@@ -1,13 +1,10 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[show edit update destroy]
+  before_action :authenticate
+  
   # TODO ADD JQUEARY for Navrbar burger sess page 404
-
   def index
-    if current_user == nil
-      redirect_to login_path
-    else
-      @appointments = Appointment.all
-    end
+    @appointments = Appointment.all
   end
 
   def unpaid
@@ -15,7 +12,7 @@ class AppointmentsController < ApplicationController
       redirect_to login_path
     else
       @appointments = Appointment.where(is_paid: false)
-      end
+    end
   end
 
   # GET /appointments/1
@@ -61,6 +58,10 @@ class AppointmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
   def appointment_params
     params.require(:appointment).permit(:time, :user_id, :services,)
+  end
+
+  def authenticate
+    redirect_to login_path if current_user.nil? || !current_user.is_admin?
   end
 
 end
