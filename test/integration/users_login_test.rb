@@ -61,4 +61,6 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
+  # todo make bug section & notes
+
 end
