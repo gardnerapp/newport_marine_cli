@@ -2,7 +2,7 @@
 # todo generate a bunch of fixtures
 one:
   time: 2021-02-16 08:59:38
-  user_id: 1
+  user: corey
   total: 88
   title: Full Detail
   additional_instructions: be a hog
@@ -11,7 +11,7 @@ one:
 
 two:
   time: 2021-05-16 08:50:38
-  user_id: 2
+  user: corey
   total: 69
   title: Wash
   additional_instructions: be a hog

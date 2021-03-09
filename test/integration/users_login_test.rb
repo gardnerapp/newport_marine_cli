@@ -4,6 +4,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
   
   def setup 
     @user = users :corey
+    @non_admin = users :reggie
   end
 
   test 'Root redirects to home for non logged in user' do
@@ -48,15 +49,16 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     post login_path params: { session: { email: @user.email, password: 'False password' } }
     assert_not is_logged_in?
     assert_template 'sessions/new'
-    assert_not flash.empty?
-    get root_path
-    assert flash.empty?
-    # TODO assert that the navbar links are correct IN all of the test
   end
 
   # Todo create appointment fixtures, then move to asserting that user is admin in controller
   test 'Failed login if user is not admin' do
-
+    get login_path
+    assert_template 'sessions/new'
+    post login_path params: { session: { email: @non_admin.email, password: 'password' } }
+    assert_not is_logged_in?
+    follow_redirect! # redirects w 302 to root then to login 
+    assert_redirected_to login_path
   end
 
 end

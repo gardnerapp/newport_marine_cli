@@ -7,7 +7,17 @@ corey:
   phone: 4010009942
   password_digest: <%= User.digest('password') %>
   remember_digest: <%= nil %>
-  admin: <%= true %>
+  admin: true
+
+reggie:
+  id: 2
+  name: Reggie
+  email: example98jhbu@example.com
+  phone: 4010009942
+  password_digest: <%= User.digest('password') %>
+  remember_digest: <%= nil %>
+  admin: false
+
 
 #one:
 #  name: MyString
