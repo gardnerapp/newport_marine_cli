@@ -1,5 +1,5 @@
 class Api::UsersController < ActionController::API
-  # GET /api/users/:id
+  before_action :set_user, only: :show
 
   # POST /api/users
   # Make Sure to only return the remember_token and exclude the remember digestx
@@ -18,11 +18,8 @@ class Api::UsersController < ActionController::API
     end
   end
 
-  #  api_users_appointments
-  # GET    /api/users/appointments
-  def appointment_index
-    @user = User.find_by(user_appointments_params[:id])
-    if @user&.authenticated?(user_appointments_params[:token])
+  def show
+    if @user&.authenticated?(params[:token])
       @appointments = @user.appointments.all
       if @appointments
         render json: @appointments, status: :accepted
@@ -40,7 +37,10 @@ class Api::UsersController < ActionController::API
     params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation)
   end
 
-  def user_appointments_params
-    params.require(:user).permit(%i[id token])
+  def set_user
+    @user = User.find(params[:id])
   end
+
+  # set user callback
+
 end

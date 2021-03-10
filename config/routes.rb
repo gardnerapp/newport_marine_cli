@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     resources :boats, only: :create
   end
   namespace :api do
-    resources :users, only: %i[create]
-    get '/users/appointments', to: 'api/users#appointment_index'
+    resources :users, only: %i[create show]
   end
   resources :users
   post '/api/login', to: 'api/sessions#create'
