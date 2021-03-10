@@ -18,7 +18,9 @@ class Api::UsersController < ActionController::API
     end
   end
 
-  def appointments
+  #  api_users_appointments
+  # GET    /api/users/appointments
+  def appointment_index
     @user = User.find_by(user_appointments_params[:id])
     if @user&.authenticated?(user_appointments_params[:token])
       @appointments = @user.appointments.all
