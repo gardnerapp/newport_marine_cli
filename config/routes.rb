@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   get '/unpaid', to: 'appointments#unpaid'
   get '/revenue', to: 'appointments#revenue'
   namespace :api do
-    resources :appointments, only: %i[create index]
+    resources :appointments, only: %i[create]
   end
   namespace :api do
     resources :boats, only: :create
   end
   namespace :api do
-    resources :users, only: :create
+    resources :users, only: %i[create appointments]
   end
   resources :users
   post '/api/login', to: 'api/sessions#create'

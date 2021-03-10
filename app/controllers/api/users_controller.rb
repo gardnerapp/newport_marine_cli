@@ -18,11 +18,27 @@ class Api::UsersController < ActionController::API
     end
   end
 
+  def appointments
+    @user = User.find_by(user_appointments_params[:id])
+    if @user&.authenticated?(user_appointments_params[:token])
+      @appointments = @user.appointments.all
+      if @appointments
+        render json: @appointments, status: :accepted
+      else
+        render json: 'No Appointments', status: :no_content
+      end
+    else
+      render json: 'unable to authenticate', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :phone,
-                                 :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :phone, :password, :password_confirmation)
   end
 
+  def user_appointments_params
+    params.require(:user).permit(%i[id token])
+  end
 end
