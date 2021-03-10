@@ -1,6 +1,5 @@
 class CreateBoats < ActiveRecord::Migration[6.0]
   def change
-    drop_table :boats
     create_table :boats do |t|
       t.string :name
       t.integer :length
