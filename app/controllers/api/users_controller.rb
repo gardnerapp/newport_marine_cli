@@ -1,6 +1,7 @@
 class Api::UsersController < ActionController::API
   before_action :set_user, only: :show
 
+
   # POST /api/users
   # Make Sure to only return the remember_token and exclude the remember digestx
   def create
@@ -11,7 +12,6 @@ class Api::UsersController < ActionController::API
                      name: @user.name,
                      email: @user.email,
                      phone: @user.phone,
-                     boat: @user.boat,
                      token: @user.remember_token }, status: :accepted
     else
       render json: @user.errors, status: :unprocessable_entity
