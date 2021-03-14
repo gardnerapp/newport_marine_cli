@@ -25,6 +25,7 @@ class User < ApplicationRecord
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
 
+  # creates a reset digest for the user
   def create_reset_digest
     self.reset_token = User.new_token
     update_attribute :reset_digest, User.digest(reset_token)
@@ -33,7 +34,7 @@ class User < ApplicationRecord
 
   # Sends password reset email
   def send_password_reset_email
-    UserMailer.passwords_reset(self).delivery_now
+    UserMailer.passwords_reset(self).deliver_now
   end
 
   def password_reset_expired?

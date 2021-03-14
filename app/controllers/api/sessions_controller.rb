@@ -19,7 +19,6 @@ class Api::SessionsController < ActionController::API
 
   private
 
-  # TODO update Flutter action to pass along session params
 
   def session_params
     params.require(:user).permit :phone, :password

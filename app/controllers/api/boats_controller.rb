@@ -1,7 +1,7 @@
 class Api::BoatsController < ActionController::API
 
   def create
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
     if @user&.authenticated?(params[:token])
       @boat = @user.build_boat(boat_params)
       if @boat.save

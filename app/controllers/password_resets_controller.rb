@@ -1,14 +1,9 @@
 class PasswordResetsController < ApplicationController
   before_action :get_user, only: %i[edit update]
   before_action :check_expiration, only: %i[edit update]
+  protect_from_forgery except: :create
 
-  # TODO ADD CUSTOMER SERVICE CONTACT TO SUCCESS TO
-  # In flutter user clicks forgot password
-  # they enter their email, a POST req w email is sent to the create action
-  # the create action finds user, creates reset digest & sends the email
-  # the user clicks the link in the email, edit controller is rendered
-  # new password, confirmation are entered in edit and PATCH req w update is sent
-
+  # POST /password_resets ** password_resets
   def create 
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
@@ -24,12 +19,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-    if params[:user][:email].empty?
+    if params[:email].empty?
       @user.errors.add(:password, "Can't be empty")
       render 'edit'
     elsif @user.update(user_params)
-      flash[:success] = "Password Succesfful Reset"
-      redirect_to
+      render 'success'
     else
       render 'edit'
     end
@@ -51,7 +45,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def get_user 
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(email: params[:email].downcase)
   end
   
   def check_expiration 

@@ -7,7 +7,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.passwords_reset user
     assert_equal 'Newport Marine Detailing Password Reset', mail.subject
     assert_equal [user.email], mail.to
-    assert_equal ['noreply@example.com'], mail.from
+    assert_equal ['from@example.com'], mail.from
     assert_match user.reset_token, mail.body.encoded
   end
 

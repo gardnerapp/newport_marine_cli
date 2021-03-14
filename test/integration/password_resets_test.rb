@@ -7,12 +7,12 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     @user = users(:corey)
   end
 
-  test 'password resets ' do
-    post password_reset_path, params: { password_reset: {email: ''} }
+  test 'password resets' do
+    post password_reset_path, params: { password_reset: {email: '' } }
     assert_response 422
 
     # Valid email 
-    post password_reset_path, params: { password_reset: {email: @user.email }}
+    post password_reset_path, params: { password_reset: { email: @user.email } }
     assert_not_equal @user.reset_digest, @user.reload.reset_digest 
     assert_equal 1, ActionMailer::Base.deliveries.size 
     # User then goes to their email & Clicks the link 
