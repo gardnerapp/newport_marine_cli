@@ -1,7 +1,7 @@
 class Api::BoatsController < ActionController::API
 
   def create
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
     if @user&.authenticated?(params[:token])
       @boat = @user.build_boat(boat_params)
       if @boat.save
@@ -17,8 +17,6 @@ class Api::BoatsController < ActionController::API
   private
 
   def boat_params
-    # How to sanatize multiple parameters
-    # params.require(:user_data).permit :user_id, :token
     params.require(:boat).permit(:name, :location, :length)
   end
 end
