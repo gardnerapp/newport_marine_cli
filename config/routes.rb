@@ -4,19 +4,20 @@ Rails.application.routes.draw do
   get '/unpaid', to: 'appointments#unpaid'
   get '/revenue', to: 'appointments#revenue'
   namespace :api do
-    resources :appointments, only: %i[create]
-  end
-  namespace :api do
-    resources :boats, only: :create
-  end
-  namespace :api do
     resources :users, only: %i[create show]
+    resources :appointments, only: %i[create index]
+    resources :boats, only: :create
+    resources :users, only: :create
   end
+  post 'api/login', to: 'api/sessions#create'
   resources :users
-  post '/api/login', to: 'api/sessions#create'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  resources :password_resets, only: %i[create edit update]
+  get '/success', to: 'password_resets#success'
+  get '/error', to: 'password_resets#error'
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

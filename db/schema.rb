@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2021_03_05_184558) do
+=======
+ActiveRecord::Schema.define(version: 2021_03_03_181329) do
+>>>>>>> password-resets
 
   create_table 'appointments', force: :cascade do |t|
     t.datetime 'time'
@@ -35,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_03_05_184558) do
     t.index ['user_id'], name: 'index_boats_on_user_id'
   end
 
+<<<<<<< HEAD
   create_table 'users', force: :cascade do |t|
     t.string 'name'
     t.string 'email'
@@ -47,6 +52,19 @@ ActiveRecord::Schema.define(version: 2021_03_05_184558) do
     t.datetime 'reset_sent_at'
     t.boolean 'admin', default: false
     t.index ['email'], name: 'index_users_on_email', unique: true
+=======
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "remember_digest"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+>>>>>>> password-resets
   end
 
   add_foreign_key 'appointments', 'users'

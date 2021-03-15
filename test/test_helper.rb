@@ -61,7 +61,16 @@ class ActiveSupport::TestCase
         boat: boat
       }
     end
-
   end
+
+  module APIAppointmentController
+    def set_appointment(user, appointment)
+      user.remember
+      post api_appointments_path, params: {
+        appointment: appointment,
+        token: user.remember_token
+      }
+    end
+ end
 
 end
