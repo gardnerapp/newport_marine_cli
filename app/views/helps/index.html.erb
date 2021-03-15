@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Helps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Contact</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @helps.each do |help| %>
+      <tr>
+        <td><%= help.contact %></td>
+        <td><%= help.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   root 'appointments#index'
+  resources :helps, only: %i[index create]
+  get '/help', to: 'helps#new'
+  get 'help/success', to: 'helps#success'
   resources :appointments, only: %i[show edit update destroy]
   get '/unpaid', to: 'appointments#unpaid'
   get '/revenue', to: 'appointments#revenue'

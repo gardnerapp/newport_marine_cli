@@ -8,6 +8,6 @@
 User.create!(name: 'Marv', email: 'example@example.com', password: '!admin1234@',
              password_confirmation: '!admin1234@', phone: '1234567890',
              admin: true)
-# todo make help page
+
 # TODO Run rails db:migrate:reset && db:seed
 # Left off on page 529
