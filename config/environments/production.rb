@@ -1,8 +1,21 @@
 Rails.application.configure do
 
-  # TODO add to dev prod and test domain names
-  Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  # mailer settings
+  Rails.application.routes.default_url_options[:host] = 'https://newportmarine.app'
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_options = {from: 'tech_support@newportmarine.app'}
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'https://newportmarine.app',
+    user_name: 'tech_support@newportmarine.app',
+    password: 'L@mb03DGesqUaTbHhz2012Fuck',
+    authentication: 'plain',
+    enable_starttls_auto: true  }
+  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
