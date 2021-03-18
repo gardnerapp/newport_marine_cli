@@ -1,55 +1,35 @@
-<div class="container flex">
-  <br/>
+
+<div class="container-flex p-3">
   <div class="row">
-    <div class="col">
-      <h5>ID</h5>
-    </div>
-    <div class="col">
-      <h5>User</h5>
-    </div>
-    <div class="col">
-      <h5>Time</h5>
-    </div>
-    <div class="col">
-      <h5>Location</h5>
-    </div>
-    <div class="col">
-      <h5>Total</h5>
-    </div>
-    <div class="col">
-      <h5>Status</h5>
-    </div>
-  </div>
-  <br/>
-</div>
-<%= @appointments.each do |appointment| %>
-  <div class="container flex">
-    <div class="row">
-      <div class="col">
-        <p> <%= link_to appointment.id, appointment %> </p>
-      </div>
-      <div class="col">
-        <p> <%= link_to appointment.user.name, appointment.user %> </p>
-      </div>
-      <div class="col">
-        <p> <%= appointment.time %></p>
-      </div>
-      <div class="col">
-        <p> <%= appointment.user.boat.location %></p>
-      </div>
-      <div class="col">
-        <p> $ <%= appointment.total %> </p>
-      </div>
-      <% if appointment.is_paid %>
-        <div class="col">
-          <p class="paid"> <%= appointment.is_paid %> </p>
-        </div>
-      <% else %>
-        <div class="col">
-          <p class="unpaid"> <%= appointment.is_paid %> </p>
-        </div>
+    <div class="col-lg">
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col"> ID</th>
+        <th scope="col"> User</th>
+        <th scope="col"> Time</th>
+        <th scope="col"> Location</th>
+        <th scope="col"> Total</th>
+        <th scope="col"> Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @appointments.each do |appointment| %>
+      <tr>
+        <th><%= link_to appointment.id, appointment %> </th>
+        <th><%= link_to appointment.user.name, appointment.user %> </th>
+        <th><%= appointment.time %> </th>
+        <th><%= appointment.user.boat.location %> </th>
+        <th>$ <%= appointment.total %> </th>
+        <% if appointment.is_paid %>
+          <th class="paid">Paid</th>
+        <% else %>
+          <th class="unpaid">Unpaid</th>
+        <% end %>
+        </tr>
       <% end %>
+      </tbody>
+    </table>
     </div>
   </div>
-<% end  %>
 </div>

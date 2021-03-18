@@ -1,8 +1,9 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: %i[show edit update destroy]
   before_action :authenticate
-  
-  # TODO ADD JQUEARY for Navrbar burger sess page 404
+
+  # TODO Edit Appointment Page & Show USer
+
   def index
     @appointments = Appointment.all
   end
@@ -17,6 +18,7 @@ class AppointmentsController < ApplicationController
   def show
     @user = User.find_by(id: @appointment.user_id)
     @boat = @user.boat
+    @services = JSON.parse @appointment.services
   end
 
   # GET /appointments/1/edit

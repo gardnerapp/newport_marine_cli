@@ -1,99 +1,75 @@
 <p id="notice"><%= notice %></p>
+<div class="container-flex p-3">
+  <div class="row">
 
-<div class="container flex">
-  <div class="row p-2">
-    <div class="col">
-      <strong> Appointment </strong>
+    <!-- User & Boat -->
+
+    <div class="col-md-4">
+      <div class="row">
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to @user.name, @user %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= @user.phone %></li>
+              <li class="list-group-item"><%= @user.email %></li>
+            </ul>
+      </div>
+        </div>
+      </div>
+      <div class="row pt-3">
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to @boat.name, @user %></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= @boat.location %></li>
+              <li class="list-group-item"><%= @boat.length %> ft</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col">
-      <strong> Time </strong>
-    </div>
-    <div class="col">
-      <strong> Additional Instructions </strong>
-    </div>
-    <div class="col">
-      <strong> Services </strong>
-    </div>
-    <div class="col">
-      <strong> Total </strong>
-    </div>
-    <div class="col">
-      <strong> Status </strong>
-    </div>
-  </div>
-  <div class="row p-2">
-    <div class="col-md">
-      <p> <%= @appointment.title %> </p>
-    </div>
-    <div class="col-md">
-      <p> <%= @appointment.time %> </p>
-    </div>
-    <div class="col-md">
-      <p> <%= @appointment.additional_instructions %> </p>
-    </div>
-    <div class="col-md">
-      <p> <%= @appointment.services %> </p>
-    </div>
-    <div class="col-md">
-      <b><p class="paid"> $ <%= @appointment.total %> </p></b>
-    </div>
-    <div class="col">
-      <% if @appointment.is_paid %>
-        <strong class="paid">PAID</strong>
-      <% else %>
-        <strong class="unpaid">NOT PAID</strong>
-      <%end  %>
-    </div>
-  </div>
-  <br/>
-  <br/>
-  <div class="row p-2">
-    <div class="col">
-      <strong> User </strong>
-    </div>
-    <div class="col">
-      <strong> Phone </strong>
-    </div>
-    <div class="col">
-      <strong> Email </strong>
-    </div>
-  </div>
-  <div class="row p-2">
-    <div class="col">
-      <p> <%= link_to @user.name, @user %></p>
-    </div>
-    <div class="col">
-      <p> <%= @user.phone %></p>
-    </div>
-    <div class="col">
-      <p> <%= @user.email %></p>
-    </div>
-  </div>
-  <br/>
-  <br/>
-  <div class="row p-2">
-    <div class="col">
-      <strong> Boat </strong>
-    </div>
-    <div class="col">
-      <strong> Length </strong>
-    </div>
-    <div class="col">
-      <strong> Location </strong>
-    </div>
-  </div>
-  <div class="row p-2">
-    <div class="col">
-      <p><%= @boat.name %></p>
-    </div>
-    <div class="col">
-      <p><%= @boat.length %></p>
-    </div>
-    <div class="col">
-      <p><%= @boat.location %></p>
+
+    <!-- Appointment details -->
+
+    <div class="col-md-8">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col"> Type </th>
+          <th scope="col"> Time </th>
+          <th scope="col"> Instructions </th>
+          <th scope="col"> Services </th>
+          <th scope="col"> Total </th>
+          <th scope="col"> Status </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th> <%= @appointment.title %> </th>
+          <th> <%= @appointment.time %> </th>
+          <th> <%= @appointment.additional_instructions %> </th>
+          <th>
+            <% @services.each do |k, v| %>
+              <p><%= k %>:      $<%= v %></p>
+
+            <% end %> </th>
+          <th> <%= @appointment.total %> </th>
+          <% if @appointment.is_paid %>
+            <th class="paid">Paid</th>
+          <% else %>
+            <th class="unpaid">Unpaid</th>
+          <%end  %>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+
 
 
 <%= link_to 'Edit', edit_appointment_path(@appointment) %>
