@@ -23,7 +23,7 @@ class Api::AppointmentsController < ActionController::API
   private
 
   def appointment_params
-    params.require(:appointment).permit(%i[time title total user_id services additional_instructions token])
+    params.require(:appointment).permit(%i[time title total user_id services additional_instructions token daily weekly])
   end
 
 end

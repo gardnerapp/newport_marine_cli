@@ -1,20 +1,19 @@
 Rails.application.configure do
 
   # mailer settings
-  Rails.application.routes.default_url_options[:host] = 'https://newportmarine.app'
-  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: 'tech_support@newportmarine.app'}
-
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'https://newportmarine.app',
-    user_name: 'tech_support@newportmarine.app',
-    password: 'L@mb03DGesqUaTbHhz2012Fuck',
-    authentication: 'plain',
-    enable_starttls_auto: true  }
+  host = 'hnewportmarine.app'
+  config.action_mailer.default_url_options = { host: host }
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => 'apikey',
+    :password       => ENV['SENDGRID_API_KEY'],
+    :enable_starttls_auto => true
+  }
+    .
   
   # Settings specified here will take precedence over those in config/application.rb.
 
