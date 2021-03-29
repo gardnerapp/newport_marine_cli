@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'appointments#index'
+  get '/privacy', to: 'helps#privacy'
   resources :helps, only: %i[index create]
   get '/help', to: 'helps#new'
   get 'help/success', to: 'helps#success'
