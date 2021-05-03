@@ -11,6 +11,7 @@ class Api::AppointmentsController < ActionController::API
       @appointment = Appointment.new(appointment_params)
       # if daily, weekly here
       if @appointment.save
+        AppointmentMailer.with(appointment: @appointment).booking_reminder.deliver_now
         render json: @appointment, status: :accepted
       else
         render json: @appointment.errors.inspect, status: :unprocessable_entity

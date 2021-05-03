@@ -1,6 +1,9 @@
 class HelpsController < ApplicationController
   before_action :authenticate, only: %i[index destroy]
 
+  # todo send dilibro email for these and for appointments
+
+
   # GET /helps
   # GET /helps.json
   def index
