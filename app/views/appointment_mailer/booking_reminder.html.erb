@@ -4,7 +4,7 @@
   <%= @appointment.title %> for <%= @appointment.time %>
 </h2>
 <th>
-  <% @appointment.services.each do |k, v| %>
+  <% JSON.parse(@appointment.services).each do |k, v| %>
     <h3><%= k %>: $<%= v %></h3>
 
   <% end %> </th>
