@@ -2,7 +2,7 @@ class AppointmentMailer < ApplicationMailer
 
   def booking_reminder(appointment)
     @appointment = appointment
-    mail to: 'newportmarinedetailing@gmail.com', cc: "gardnerappdevelopment@gmail.com", subject: 'An Appointment was booked !'
+    mail to: 'c0reygardner63@gmail.com', subject: 'OOPS!'
   end
 
   def appointment_reminder(appointment)
